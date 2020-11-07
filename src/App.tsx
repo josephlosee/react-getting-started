@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function IncrementButton(props: any){
+  const {handler, increment} = props
+  const handleClick = () => handler(increment);
+  return <button onClick={handleClick}>+{increment}</button>
+}
+
 function App() {
+  const [counter, setCounter] = useState(0);
+  const updateCounter = (increment:number) => {setCounter(counter+increment)};
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +26,11 @@ function App() {
         >
           Learn React
         </a>
+        <IncrementButton increment={1} handler={updateCounter}/>
+        <IncrementButton increment={5} handler={updateCounter}/>
+        <IncrementButton increment={10} handler={updateCounter}/>
+        <IncrementButton increment={100} handler={updateCounter}/>
+        <p>{counter}</p>
       </header>
     </div>
   );
